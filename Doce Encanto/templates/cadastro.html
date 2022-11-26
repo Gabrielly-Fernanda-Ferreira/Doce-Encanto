@@ -1,0 +1,223 @@
+<!doctype html>
+	<html lang="pt-br">
+	<head>
+	<meta charset="utf-8">
+	  <title> Cadastro de Produtos </title>
+	  <link rel="stylesheet" href="{{url_for('static', filename='css/estilo.css')}}">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  
+	  <!-- Bootstrap CSS -->
+	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	  <link href="estilo.css" rel="stylesheet" type="text/css">
+
+	  <!--JQuery, Popper e Bootstrap.min.js -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
+	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+	
+	<div class="container">
+
+        <img src="/static/images/topo.png" class="topo">
+
+        <!-- menu de navegação-->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white text-dark bg-white rounded rounded">
+			<div class="container-fluid">
+			<img src="/static/images/logo.jpg" width='50' height='50'>
+            
+            <a class="navbar-brand" href=""> <font face="Modern Love" size="5"> <b> Doce Encanto </b> </font> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+			</button>
+            
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('cadastro')}}"> <b> Cadastrar </b> </a>
+					</li>
+                    
+                    <li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Bolos </b> </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Cupcakes </b> </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Doces </b> </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Donuts </b> </a>
+					</li>
+					
+				</ul>
+            </div>
+                <a href="{{url_for('index')}}"> <button class="botao" style="float: left;"> Sair </button> </a>
+			</div>
+		</nav>
+    
+
+		<!-- Formulário de Cadastro-->
+
+		<div class="col-md-6 offset-md-3">
+			<br> <h2 class="bg-white rounded rounded"> <font face="Modern Love" color="Black"> <b> <center> Cadastro de Produtos </center> </b> </font> </h2> <br> 
+		</div>
+
+		<form action="cadastro" method="POST" enctype="multipart/form-data">
+			
+			<div class="form-group">
+				<div class="col-md-6 offset-md-3">
+				  <label> <b> Nome do Produto </b> </label>
+				  <input type="text" id="nome" name="nome" class="form-control" style="border-color: #ffd0f1;">
+				</div>
+			</div>
+
+			<br>
+
+			<!-- Select de Categorias -->
+
+			<label style="padding-left: 25%;"> <b> Categoria </b> </label>
+			<center>
+				<select name="select" class="seleciona">
+					<option value="bolos"> Bolos </option>
+					<option value="cupcakes"> Cupcakes </option>
+					<option value="doces"> Doces </option>
+					<option value="donuts"> Donuts </option>
+				</select>
+			</center> 
+
+			<br>
+
+			<div class="form-group">
+				<div class="col-md-6 offset-md-3">
+				  <label> <b> Descrição </b> </label>
+				  <input type="text" id="descricao" name="descricao" class="form-control" style="border-color: #ffd0f1;">
+				</div>
+			</div>
+
+			<br>
+
+			<div class="form-group">
+				<div class="col-md-6 offset-md-3">
+				  <label for="formFile" class="form-label"> <b> Imagem </b> </label>
+				  <input class="form-control" type="file" name="arquivo" id="arquivo" style="border-color: #ffd0f1;">
+				</div>
+			</div>
+
+			<br>
+
+			<!-- Mostar visualização da imagem -->
+
+			<div class="form-group">
+				<div class="col-md-6 offset-md-3">
+				   <center> <img id="imagem" width='300' height='200'> </center>
+				</div>
+			   
+			   <div class="col-md-6 offset-md-3">
+					<center> <input type="hidden" name="arquivoAntigo" id="arquivoAntigo"> </center>
+			 	</div>
+			</div>
+
+			<br>
+
+			<div class="form-group">
+				<div class="col-md-6 offset-md-3">
+					<center> <input type="submit" value="Cadastrar" name="cadastrar" id="cadastrar" class="botao" style="width: 90px;"> </center>
+				</div>
+			</div>
+
+			<br>
+
+		</form>
+
+		<script>
+			$(function()
+			{
+				$('#arquivo').change(function()
+				{
+					const file = $(this)[0].files[0]
+					const fileReader = new FileReader()
+					fileReader.onloadend = function()
+					{
+						$('#imagem').attr('src', fileReader.result)
+					}
+					fileReader.readAsDataURL(file)
+				})
+			})
+		</script>
+
+
+		<!-- Modal de Erro -->
+
+		{% if erro %}
+
+		<div class="modal fade" id="msgErro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"> <b> ATENÇÃO </b> </h5>
+					</div>
+					<div class="modal-body">
+						<b> {{erro}} </b>
+					</div>
+					<div class="modal-footer">
+						<a href='{{url_for('cadastro')}}'> <button class="botao" style="float: left;"> FECHAR </button> </a>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+		<script>
+			
+			$(document).ready(function()
+			{
+				$('#msgErro').modal('show');
+			});
+					
+		</script>
+
+		{% endif %}
+
+
+		<!-- Modal de Mensagem -->
+
+		{% if mensagem %}
+
+		<div class="modal fade" id="msgCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"> <b> ATENÇÃO </b> </h5>
+					</div>
+					<div class="modal-body">
+						<b> {{mensagem}} </b>
+					</div>
+					<div class="modal-footer">
+						<a href='{{url_for('lista')}}'> <button class="botao" style="float: left;"> FECHAR </button> </a>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+		<script>
+			
+			$(document).ready(function()
+			{
+				$('#msgCadastro').modal('show');
+			});
+					
+		</script>
+
+		{% endif %}
+
+        <br> 
+
+	</div>
+	</body>
+	</html>

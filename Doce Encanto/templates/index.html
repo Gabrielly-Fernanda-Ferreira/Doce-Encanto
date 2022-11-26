@@ -1,0 +1,142 @@
+<!doctype html>
+	<html lang="pt-br">
+	<head>
+	<meta charset="utf-8">
+	  <title> Doce Encanto </title>
+	  <link rel="stylesheet" href="{{url_for('static', filename='css/estilo.css')}}">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  
+	  <!-- Bootstrap CSS -->
+	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	  <link href="estilo.css" rel="stylesheet" type="text/css">
+
+	  <!--JQuery, Popper e Bootstrap.min.js -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
+	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+      
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+      <link rel="stylesheet" href="assets/css/style.css"> 
+      
+
+	</head>
+	<body>
+	
+	<div class="container">
+
+        <img src="/static/images/topo.png" class="topo">
+
+        <!-- menu de navegação-->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white text-dark bg-white rounded rounded">
+			<div class="container-fluid">
+			<img src="/static/images/logo.jpg" width='50' height='50'>
+            
+            <a class="navbar-brand" href=""> <font face="Modern Love" size="5"> <b> Doce Encanto </b> </font> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+			</button>
+            
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    
+                    <li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Bolos </b> </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Cupcakes </b> </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Doces </b> </a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('lista')}}"> <b> Donuts </b> </a>
+					</li>
+					
+				</ul>
+            </div>
+                <a href="{{url_for('login')}}"> <button class="botao" style="float: left;"> Login </button> </a>
+			</div>
+		</nav>
+		
+	<br> <br>
+
+
+    <!-- Carousel -->
+
+    <center>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+            
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/static/images/slogan.png" class="d-block w-50">
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="/static/images/bolos.png" class="d-block w-50">
+                </div>
+                
+                <div class="carousel-item"> 
+                    <img src="/static/images/cupcakes.png" class="d-block w-50">
+                </div>
+
+                <div class="carousel-item"> 
+                    <img src="/static/images/doces.png" class="d-block w-50">
+                </div>
+
+                <div class="carousel-item"> 
+                    <img src="/static/images/donuts.png" class="d-block w-50">
+                </div>
+            </div>
+            
+            
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+
+        <!-- Rodapé da página inicial-->
+
+        <br> 
+        <div class="footer-basic">
+            <footer>
+                <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Services</a></li>
+                    <li class="list-inline-item"><a href="#">About</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                </ul>
+                <p class="copyright">Doce Encanto © 2022</p>
+            </footer>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        
+    </center>
+    
+    </div>
+	</body>
+	</html>
