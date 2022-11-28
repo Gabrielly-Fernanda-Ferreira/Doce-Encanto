@@ -110,11 +110,9 @@ def lista():
 
      with open('cadastro.csv','rt') as file_in:
         leitor= csv.DictReader(file_in,['nome','categoria','descricao','arquivo'])
-        for row in leitor:
-            tasks = dict(row)
-            print(tasks)
+        leitor.readrows(tasks)
             
-        return render_template('lista.html', area_exclusiva = area_exclusiva, tasks = tasks)
+        return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor)
         
         
         if tipo == "administrador":
