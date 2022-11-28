@@ -108,31 +108,23 @@ def cadastro():
 @app.route("/lista", methods=['POST', 'GET'])
 def lista():
 
+     with open('cadastro.csv','rt') as file_in:
+        leitor= csv.DictReader(file_in,['nome','categoria','descricao','arquivo'])
+        for row in leitor:
+            tasks = dict(row)
+            print(tasks)
+            
+        return render_template('lista.html', area_exclusiva = area_exclusiva, tasks = tasks)
+        
+        
+        if tipo == "administrador":
+            area_exclusiva = "sim" 
+             
+            
+        else:
+            return render_template('lista.html')
 
-    if tipo == "administrador":
 
-        area_exclusiva = "sim"
-
-        global tasks
-
-        tasks = [
-                 {'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': path}
-                ]
-        tasks.append(task)        
-
-
-        with open('cadastro.csv','rt') as file_out:
-            leitor= csv.DictReader(file_out,['nome','categoria','descricao','arquivo'])
-            leitor.readheader()
-            leitor.readrows(tasks)
-            for linha in leitor:
-                print(linha['nome'])
-
-        return render_template('lista.html', area_exclusiva = area_exclusiva,tasks=tasks)
-
-    else:
-
-        return render_template('lista.html')
 
 
 
