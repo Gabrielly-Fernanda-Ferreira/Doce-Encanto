@@ -82,7 +82,7 @@ def cadastro():
             global tasks
 
             tasks = [
-                        {'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': path}
+                        {'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': 'static/backup/' + arquivo.filename}
                     ]
 
             if not exists('cadastro.csv'):
@@ -108,25 +108,46 @@ def cadastro():
 @app.route("/lista", methods=['POST', 'GET'])
 def lista():
 
-    with open('cadastro.csv','rt') as file_in:
-        leitor= csv.DictReader(file_in)
+    if not exists('cadastro.csv'):
 
-      
-        
+        if tipo == "administrador":
+
+            area_exclusiva = "sim"
+
+            return render_template('lista.html', area_exclusiva = area_exclusiva)
+
+        else:
             
-        
-    if tipo == "administrador":
-            area_exclusiva = "sim" 
-            return render_template('lista.html', area_exclusiva=area_exclusiva, leitor=leitor)
-
+            return render_template('lista.html')
+    
     else:
-        
-         return render_template('lista.html', leitor=leitor)    
+
+        with open('cadastro.csv', 'rt') as file_in:
+            leitor = csv.DictReader(file_in)
+
+            if tipo == "administrador":
+
+                area_exclusiva = "sim"
+
+                return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor)
+
+            else:
+
+                return render_template('lista.html', leitor = leitor)
 
 
 
+#página de alteracao
+@app.route("/alteracao/<nome>", methods=['POST', 'GET'])
+def alteracao(nome):
+    return render_template('alteracao.html')
 
 
+
+#página de exclusao
+@app.route("/exclusao/<nome>", methods=['POST', 'GET'])
+def exclusao(nome):
+    return redirect(url_for('lista'))
         
 
 

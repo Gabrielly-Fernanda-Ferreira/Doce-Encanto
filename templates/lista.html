@@ -79,38 +79,34 @@
 		</div>
 
 		<!-- Listagem de Produtos -->
-		
 
         <table class="table table-striped">
-			
-            <tr>
-				<td> <center> <b>Imagem</b> </center> </td> 
-                <td> <center> <b>Nome</b> </center> </td>
-                <td> <center> <b>Descrição </b> </center> </td>
-
-				{% if area_exclusiva %}
-                <td> <center> <b> Alterar </b> </right> </center></td>
-                <td> <center> <b> Excluir </b> </right> </center></td>
-				{% endif %}
-            </tr>
-		
-        </table>
-		
-		<table class="table table-striped">
-			{% for row in leitor:%}
-			
             <tr> 
-                <td> <center> <b>row{{['arquivo']}} </b> </center> </td>
-                <td> <center> <b>row{{['nome']}}</b> </center> </td>
-                <td> <center> <b>row{{['descricao']}} </b> </center> </td>
-				
+                <td> <center> <b> Imagem </b> </center> </td>
+                <td> <center> <b> Nome Produto </b> </center> </td>
+                <td> <center> <b> Descrição </b> </center> </td>
 				{% if area_exclusiva %}
-                <td> <center> <b> Alterar </b> </right> </center></td>
-                <td> <center> <b> Excluir </b> </right> </center></td>
+                <td> <center> <b> Alterar </b> </right> </center>
+                <td> <center> <b> Excluir </b> </right> </center>
 				{% endif %}
             </tr>
-			{% endfor %}
         </table>
+
+		<table class="table table-striped">
+			
+			{% for row in leitor: %}
+				<tr> 
+					<td> <img src='{{row['arquivo']}}' width='200' height='100'> </br> </td>
+					<td> <br> <center> <b> {{row['nome']}} </b> </center> </td>
+					<td> <br> <center> <b> {{row['descricao']}} </b> </center> </td>
+					{% if area_exclusiva %}
+					<td> <br> <center> <a href='/alteracao/{{row['nome']}}'> <button class="botao" style="float: left;"> Alterar </button> </a> </center> </td>
+					<td> <br> <center> <a href='/exclusao/{{row['nome']}}'> <button class="botao" style="float: left;"> Excluir </button> </a> </center> </td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+
+		</table>
 
     </div>
     </body>

@@ -1,8 +1,2 @@
 nome,categoria,descricao,arquivo
-
-Bolo,bolos,Bolo de Chocolate,static/backup\bolos.png
-
-Brigadeiro,doces,Brigadeiro,static/backup\doces.png
-
-Cupcake,cupcakes,cupcake de morango,static/backup/cupcakes.png
-Cupcake,cupcakes,cupcake de morango,static/backup/cupcakes.png
+Bolo,bolos,Bolo de Chocolate,static/backup/bolos.png
