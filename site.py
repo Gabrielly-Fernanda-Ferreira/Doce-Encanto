@@ -147,7 +147,28 @@ def alteracao(nome):
 #página de exclusao
 @app.route("/exclusao/<nome>", methods=['POST', 'GET'])
 def exclusao(nome):
-    return redirect(url_for('lista'))
+    
+    with open('cadastro.csv', 'rt') as file_in:
+        
+        leitor = csv.DictReader(file_in)
+
+
+        del row['arquivo']
+        del row['nome']
+        del row['descricao']
+            
+            
+        if tipo == "administrador":
+            
+            area_exclusiva = "sim"
+                
+            return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor)
+        else:
+                
+            return render_template('lista.html', leitor = leitor)
+        
+    return render_template('lista.html', leitor = leitor)
+    
         
 
 

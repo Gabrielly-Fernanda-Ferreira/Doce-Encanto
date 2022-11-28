@@ -86,8 +86,8 @@
                 <td> <center> <b> Nome Produto </b> </center> </td>
                 <td> <center> <b> Descrição </b> </center> </td>
 				{% if area_exclusiva %}
-                <td> <center> <b> Alterar </b> </right> </center>
-                <td> <center> <b> Excluir </b> </right> </center>
+                <td> <center> <b> Alterar </b> </center></td>
+                <td> <center> <b> Excluir </b> </center></td>
 				{% endif %}
             </tr>
         </table>
@@ -97,11 +97,12 @@
 			{% for row in leitor: %}
 				<tr> 
 					<td> <img src='{{row['arquivo']}}' width='200' height='100'> </br> </td>
-					<td> <br> <center> <b> {{row['nome']}} </b> </center> </td>
-					<td> <br> <center> <b> {{row['descricao']}} </b> </center> </td>
+					<td> <br> <left> <b> {{row['nome']}} </b> </left></br> </td>
+					<td> <br> <center> <b> {{row['descricao']}} </b> </center></br> </td>
 					{% if area_exclusiva %}
-					<td> <br> <center> <a href='/alteracao/{{row['nome']}}'> <button class="botao" style="float: left;"> Alterar </button> </a> </center> </td>
-					<td> <br> <center> <a href='/exclusao/{{row['nome']}}'> <button class="botao" style="float: left;"> Excluir </button> </a> </center> </td>
+					<td> <br> <center> <a href='/alteracao/{{row['nome']}}'> <button class="botao" style="float: center;"> Alterar </button> </a> </center> </td>
+					<td> <br> <center> <a href='/exclusao/{{row['nome']}}'> <button class="botao" style="float: center;"> Excluir </button> </a> </center> </td>
+					
 					{% endif %}
 				</tr>
 			{% endfor %}
