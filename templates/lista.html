@@ -79,14 +79,29 @@
 		</div>
 
 		<!-- Listagem de Produtos -->
+		
 
         <table class="table table-striped">
+			
+            <tr>
+				<td> <center> <b>Imagem</b> </center> </td> 
+                <td> <center> <b>Nome</b> </center> </td>
+                <td> <center> <b>Descrição </b> </center> </td>
+				{% if area_exclusiva %}
+                <td> <center> <b> Alterar </b> </right> </center>
+                <td> <center> <b> Excluir </b> </right> </center>
+				{% endif %}
+            </tr>
+		
+        </table>
+		
+		<table class="table table-striped">
 			{%for task in tasks:%}
             <tr> 
-                <td> <center> <b>{{task['nome']}} </b> </center> </td>
-                <td> <center> <b>{{task['categoria']}}</b> </center> </td>
+                <td> <center> <b>{{task['arquivo']}} </b> </center> </td>
+                <td> <center> <b>{{task['nome']}}</b> </center> </td>
                 <td> <center> <b>{{task['descricao']}} </b> </center> </td>
-				<td> <center> <b>{{task['arquivo']}} </b> </center> </td>
+				
 				{% if area_exclusiva %}
                 <td> <center> <b> Alterar </b> </right> </center>
                 <td> <center> <b> Excluir </b> </right> </center>

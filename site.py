@@ -107,33 +107,28 @@ def cadastro():
 #página de listagem
 @app.route("/lista", methods=['POST', 'GET'])
 def lista():
-   
+
 
     if tipo == "administrador":
 
         area_exclusiva = "sim"
 
+        global tasks
+
         tasks = [
                  {'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': path}
                 ]
-        tasks.append(task)
-    
+        tasks.append(task)        
 
-        if not exists('cadastro.csv'):
-            with open('cadastro.csv', 'xt') as file_out:
-                escritor = csv.DictWriter(file_out, ['nome', 'categoria', 'descricao', 'arquivo'])
-                escritor.writeheader()
-                escritor.writerows(tasks)
 
-        else:
-            with open('cadastro.csv', 'rt') as file_out:
-                leitor = csv.DictReader (file_out, ['nome', 'categoria', 'descricao', 'arquivo'])
-                leitor.readheader()
-                leitor.readrows(tasks)            
+        with open('cadastro.csv','rt') as file_out:
+            leitor= csv.DictReader(file_out,['nome','categoria','descricao','arquivo'])
+            leitor.readheader()
+            leitor.readrows(tasks)
+            for linha in leitor:
+                print(linha['nome'])
 
         return render_template('lista.html', area_exclusiva = area_exclusiva,tasks=tasks)
-
-        
 
     else:
 
