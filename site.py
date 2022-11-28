@@ -108,22 +108,26 @@ def cadastro():
 @app.route("/lista", methods=['POST', 'GET'])
 def lista():
 
-     with open('cadastro.csv','rt') as file_in:
-        leitor= csv.DictReader(file_in,['nome','categoria','descricao','arquivo'])
-        leitor.readrows(tasks)
+    with open('cadastro.csv','rt') as file_in:
+        leitor= csv.DictReader(file_in)
+
+      
+        
             
-        return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor)
         
-        
-        if tipo == "administrador":
+    if tipo == "administrador":
             area_exclusiva = "sim" 
-             
-            
-        else:
-            return render_template('lista.html')
+            return render_template('lista.html', area_exclusiva=area_exclusiva, leitor=leitor)
+
+    else:
+        
+         return render_template('lista.html', leitor=leitor)    
 
 
 
+
+
+        
 
 
 if __name__ == "__main__":

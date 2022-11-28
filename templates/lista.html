@@ -87,9 +87,10 @@
 				<td> <center> <b>Imagem</b> </center> </td> 
                 <td> <center> <b>Nome</b> </center> </td>
                 <td> <center> <b>Descrição </b> </center> </td>
+
 				{% if area_exclusiva %}
-                <td> <center> <b> Alterar </b> </right> </center>
-                <td> <center> <b> Excluir </b> </right> </center>
+                <td> <center> <b> Alterar </b> </right> </center></td>
+                <td> <center> <b> Excluir </b> </right> </center></td>
 				{% endif %}
             </tr>
 		
@@ -97,14 +98,15 @@
 		
 		<table class="table table-striped">
 			{% for row in leitor:%}
+			
             <tr> 
-                <td> <center> <b>{{task['arquivo']}} </b> </center> </td>
-                <td> <center> <b>{{task['nome']}}</b> </center> </td>
-                <td> <center> <b>{{task['descricao']}} </b> </center> </td>
+                <td> <center> <b>row{{['arquivo']}} </b> </center> </td>
+                <td> <center> <b>row{{['nome']}}</b> </center> </td>
+                <td> <center> <b>row{{['descricao']}} </b> </center> </td>
 				
 				{% if area_exclusiva %}
-                <td> <center> <b> Alterar </b> </right> </center>
-                <td> <center> <b> Excluir </b> </right> </center>
+                <td> <center> <b> Alterar </b> </right> </center></td>
+                <td> <center> <b> Excluir </b> </right> </center></td>
 				{% endif %}
             </tr>
 			{% endfor %}
