@@ -101,7 +101,7 @@
 					<td> <br> <center> <b> {{row['descricao']}} </b> </center> </td>
 					{% if area_exclusiva %}
 					<td> <br> <center> <a href='/alteracao/{{row['id']}}'> <button class="botao" style="float: left;"> Alterar </button> </a> </center> </td>
-					<td> <br> <center> <a href='/exclui/{{row['id']}}'> <button class="botao" style="float: left;"> Excluir </button> </a> </center> </td>
+					<td> <br> <center> <a href='/exclusao/{{row['id']}}'> <button class="botao" style="float: left;"> Excluir </button> </a> </center> </td>
 					{% endif %}
 				</tr>
 			{% endfor %}

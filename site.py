@@ -209,35 +209,27 @@ def alteracao_produtos(id):
 
 
 #página de exclusão
-@app.route("/exclui/<id>", methods=['POST', 'GET'])
-
-def exclui(id):
+@app.route("/exclusao/<id>", methods=['POST', 'GET'])
+def exclusao(id):
     
-    linhas= []
-
-    if request.method=='POST':
+    new_tasks = []
         
-        with open('cadastro.csv', 'rt') as file_in:
-            leitor = csv.DictReader(file_in)
-            
-            for row in leitor:
-                produtos = dict(row)
-                linhas.append(produtos)
+    with open('cadastro.csv', 'rt') as file_in:
+        leitor = csv.DictReader(file_in)
+        for row in leitor:
+            produtos = dict(row)
+            new_tasks.append(produtos)
+            if produtos['id'] == id:   
+                new_tasks.remove(produtos)
                 
-                if produtos['id'] == id:
-                    linhas.remove(produtos)
-                    
-        with open ('cadastro.csv','wt') as file_out:
-            escritor= csv.DictWriter(file_out,['id','nome','categoria','descricao','arquivo'])
-            escritor.writeheader()
-            escritor.writerows(linhas)
-        
+    with open('cadastro.csv', 'wt') as file_out:
+        escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo'])
+        escritor.writeheader()
+        escritor.writerows(new_tasks)
+
     return redirect(url_for('lista'))
+
+
     
-
-    
-
-
-
 if __name__ == "__main__":
     app.run(debug=True)
