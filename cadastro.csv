@@ -7,3 +7,11 @@ id,nome,categoria,descricao,arquivo
 6,Brigadeiro,doces,Brigadeiro de chocolate com granulados,static/backup/doce_brigadeiro.png
 7,Bolo de Fubá,bolos,Bolo de fubá com cobertura de goiabada,static/backup/bolo_fuba.png
 8,Camafeu,doces,Doce recheado com nozes,static/backup/doce_camafeu.png
+9,Cupcake de Árvore de Natal,cupcakes,cupcake com recheio de morango,static/backup/cupcake_arvore.png
+10,Donuts Céu Azul,donuts,Donuts com recheio de doce de leite ,static/backup/donuts_azul.png
+11,Cupcake de Morango,cupcakes,Cupcake com recheio de morango,static/backup/cupcake_morango.png
+12,Donuts de Chocolate,donuts,Donuts com cobertura e recheio de chocolate ,static/backup/donuts_chocolate.png
+13,Cupcake de Chocolate,cupcakes,Cupcake de chocolate recheado com caldo de cereja,static/backup/cupcake_chocolate.png
+14,Donuts Rosa,donuts,Donuts com cobertura de morango e recheio tutti-frutti,static/backup/donuts_rosa.png
+15,Cupcake Natalino,cupcakes,Cupcakes personalizados e decorados com recheio de creme de avelã,static/backup/cupcake_natalino.png
+16,Donuts de Prestígio,donuts,Donuts com recheio de leite ninho e coco ralado,static/backup/donuts_branco.png
