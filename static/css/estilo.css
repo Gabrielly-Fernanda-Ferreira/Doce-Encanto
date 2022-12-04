@@ -11,13 +11,15 @@
 	border-color: white;
 	color: white;
 	border-radius: 6px;
-	width: 80px;
+	width: 85px;
+	height: 30px;
 	font-weight: bold;
 }
 
 .botao:hover
 {
-	width: 80px;
+	width: 85px;
+	height: 30px;
 	background-color: white;
 	border-color:#fe4785;
 	color:#fe4785;

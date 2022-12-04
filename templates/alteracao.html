@@ -10,7 +10,7 @@
 	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	  <link href="estilo.css" rel="stylesheet" type="text/css">
 
-	  <!--JQuery, Popper e Bootstrap.min.js -->
+	  <!-- JQuery, Popper e Bootstrap.min.js -->
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script>
 	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
 
         <img src="/static/images/topo.png" class="topo">
 
-        <!-- menu de navegação-->
+        <!-- Menu de navegação-->
 
         <nav class="navbar navbar-expand-lg navbar-light bg-white text-dark bg-white rounded rounded">
 			<div class="container-fluid">
@@ -63,24 +63,24 @@
 		</nav>
     
 
-		<!-- Formulário de Cadastro-->
+		<!-- Formulário de alteração -->
 
 		<div class="col-md-6 offset-md-3">
 			<br> <h2 class="bg-white rounded rounded"> <font face="Modern Love" color="Black"> <b> <center> Alteração de Produtos </center> </b> </font> </h2> <br> 
 		</div>
 
-		<form action="/alteracaoProdutos/{{produtos['id']}}" method="POST" enctype="multipart/form-data">
+		<form action="/alteracaoProdutos/{{produtos['id']}}" method="POST" enctype="multipart/form-data" name="formulario">
 			
 			<div class="form-group">
 				<div class="col-md-6 offset-md-3">
 				  <label> <b> Nome do Produto </b> </label>
-				  <input value="{{produtos['nome']}}" type="text" id="nome" name="nome" class="form-control" style="border-color: #ffd0f1;">
+				  <input value="{{produtos['nome']}}" type="text" id="nome" name="nome" class="form-control" required style="border-color: #ffd0f1;">
 				</div>
 			</div>
 
 			<br>
 
-			<!-- Select de Categorias -->
+			<!-- Select de categorias -->
 
 			{% if produtos['categoria'] == 'bolos': %}
 			<label style="padding-left: 25%;"> <b> Categoria </b> </label>
@@ -139,7 +139,7 @@
 			<div class="form-group">
 				<div class="col-md-6 offset-md-3">
 				  <label> <b> Descrição </b> </label>
-				  <input value="{{produtos['descricao']}}" type="text" id="descricao" name="descricao" class="form-control" style="border-color: #ffd0f1;">
+				  <input value="{{produtos['descricao']}}" type="text" id="descricao" name="descricao" class="form-control" required style="border-color: #ffd0f1;">
 				</div>
 			</div>
 
@@ -148,17 +148,17 @@
 			<div class="form-group">
 				<div class="col-md-6 offset-md-3">
 				  <label for="formFile" class="form-label"> <b> Imagem </b> </label>
-				  <input class="form-control" type="file" name="arquivo" id="arquivo" style="border-color: #ffd0f1;">
+				  <input class="form-control" type="file" name="arquivo" id="arquivo" required style="border-color: #ffd0f1;">
 				</div>
 			</div>
 
 			<br>
 
-			<!-- Mostar visualização da imagem -->
+			<!-- Mostrar visualização da imagem -->
 
 			<div class="form-group">
 				<div class="col-md-6 offset-md-3">
-				   <center> <img src="{{produtos['arquivo']}}" id="imagem" width='300' height='200'> </center>
+				   <center> <img src="/{{produtos['arquivo']}}" id="imagem" width='300' height='200'> </center>
 				</div>
 			   
 			   <div class="col-md-6 offset-md-3">
@@ -193,70 +193,6 @@
 				})
 			})
 		</script>
-
-
-		<!-- Modal de Erro -->
-
-		{% if erro %}
-
-		<div class="modal fade" id="msgErro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"> <b> ATENÇÃO </b> </h5>
-					</div>
-					<div class="modal-body">
-						<b> {{erro}} </b>
-					</div>
-					<div class="modal-footer">
-						<a href='/alteracaoProdutos/produtos['id']}}'> <button class="botao" style="float: left;"> FECHAR </button> </a>
-					</div>
-				</div>
-			</div>
-		</div>
-				
-		<script>
-			
-			$(document).ready(function()
-			{
-				$('#msgErro').modal('show');
-			});
-					
-		</script>
-
-		{% endif %}
-
-
-		<!-- Modal de Mensagem -->
-
-		{% if mensagem %}
-
-		<div class="modal fade" id="msgCadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"> <b> ATENÇÃO </b> </h5>
-					</div>
-					<div class="modal-body">
-						<b> {{mensagem}} </b>
-					</div>
-					<div class="modal-footer">
-						<a href='{{url_for('lista')}}'> <button class="botao" style="float: left;"> FECHAR </button> </a>
-					</div>
-				</div>
-			</div>
-		</div>
-				
-		<script>
-			
-			$(document).ready(function()
-			{
-				$('#msgCadastro').modal('show');
-			});
-					
-		</script>
-
-		{% endif %}
 
         <br> 
 

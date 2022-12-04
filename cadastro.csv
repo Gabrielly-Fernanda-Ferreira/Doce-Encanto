@@ -1,1 +1,9 @@
 id,nome,categoria,descricao,arquivo
+1,Bolo de Brigadeiro ,bolos,Bolo de brigadeiro com kit kat e morangos,static/backup/bolo_brigadeiro.png
+2,Doce de Leite Ninho,doces,Doce de leite ninho com cobertura de nutella,static/backup/doce_ninho.png
+3,Bolo de Chocolate,bolos,Bolo de chocolate com kit kat e confete,static/backup/bolo_confete.png
+4,Bolo de Morango,bolos,Bolo com recheio de leite ninho com morango,static/backup/bolo_morango.png
+5,Copo de Chocolate,doces,Copo com recheio de chocolate e cerejas,static/backup/doce_cereja.png
+6,Brigadeiro,doces,Brigadeiro de chocolate com granulados,static/backup/doce_brigadeiro.png
+7,Bolo de Fubá,bolos,Bolo de fubá com cobertura de goiabada,static/backup/bolo_fuba.png
+8,Camafeu,doces,Doce recheado com nozes,static/backup/doce_camafeu.png

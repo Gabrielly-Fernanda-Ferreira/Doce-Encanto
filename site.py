@@ -12,10 +12,11 @@ app = Flask(__name__)
 app.config['upload_folder'] = upload_folder
 
 
+
 #tipo começa como comum
 tipo = "usuario"
 
-#ao chamar a função acesso muda para administrador
+#ao chamar a função o acesso muda para administrador
 def acesso():
     global tipo 
     tipo = "administrador" 
@@ -61,7 +62,6 @@ def login():
 def cadastro():
 
     id = '1'
-    erro = None 
     mensagem = None
 
     #atribui um id para cada produto
@@ -75,7 +75,7 @@ def cadastro():
                 produtos = dict(row)
                 if produtos['id'] >= count:
                     id = int(produtos['id'])
-            id = int(id) + 1
+            id = id + 1
 
 
     #cadastra os produtos
@@ -85,55 +85,62 @@ def cadastro():
         categoria = request.form['select']
         descricao = request.form['descricao']
         arquivo = request.files['arquivo']
-        
-        if arquivo.filename == '' or nome == '' or descricao == '':
 
-            erro = "Por favor, preencha todos os campos !!"
+        #salva as imagens na pasta definida na variável upload_folder
+        path = os.path.join(app.config['upload_folder'], arquivo.filename)
+        arquivo.save(path)
+
+        #lista de dicionários
+        tasks = [
+                    {'id': id, 'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': 'static/backup/' + arquivo.filename}
+                ]
+
+        if not exists('cadastro.csv'):
+
+            #xt - cria um arquivo se ele não existir
+            with open('cadastro.csv', 'xt') as file_out:
+                escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo'])
+                escritor.writeheader()
+                escritor.writerows(tasks)
 
         else:
 
-            path = os.path.join(app.config['upload_folder'], arquivo.filename)
-            arquivo.save(path)
+            #at - adiciona ao final do arquivo se ele existir
+            with open('cadastro.csv', 'at') as file_out:
+                escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo']) 
+                escritor.writerows(tasks)
+                    
+        mensagem = "Produto cadastrado com sucesso !!"
 
-            tasks = [
-                        {'id': id, 'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': '/static/backup/' + arquivo.filename}
-                    ]
-
-            if not exists('cadastro.csv'):
-
-                with open('cadastro.csv', 'xt') as file_out:
-                    escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo'])
-                    escritor.writeheader()
-                    escritor.writerows(tasks)
-
-            else:
-
-                with open('cadastro.csv', 'at') as file_out:
-                    escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo']) 
-                    escritor.writerows(tasks)
-                        
-            mensagem = "Produto cadastrado com sucesso !!"
-
-    return render_template('cadastro.html', erro = erro, mensagem = mensagem)
+    return render_template('cadastro.html', mensagem = mensagem)
 
 
 
 #página de listagem
-@app.route("/lista", methods=['POST', 'GET'])
+@app.route("/lista/", methods=['POST', 'GET'])
 def lista():
 
+    pesquisa = ""
+
+    #pesquisa transformando as palavras em letras minúsculas
+    if request.method == 'POST':
+
+        pesquisa = request.form['pesquisa'].lower()
+            
+    #se o arquivo cadastro.csv não existir mostra a lista vazia
     if not exists('cadastro.csv'):
 
         if tipo == "administrador":
 
             area_exclusiva = "sim"
 
-            return render_template('lista.html', area_exclusiva = area_exclusiva)
+            return render_template('lista.html', area_exclusiva = area_exclusiva, pesquisa = pesquisa)
 
         else:
             
-            return render_template('lista.html')
+            return render_template('lista.html', pesquisa = pesquisa)
     
+    #se existir mostra a lista com os dados correspondentes
     else:
 
         with open('cadastro.csv', 'rt') as file_in:
@@ -143,11 +150,11 @@ def lista():
 
                 area_exclusiva = "sim"
 
-                return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor)
+                return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor, pesquisa = pesquisa)
 
             else:
 
-                return render_template('lista.html', leitor = leitor)
+                return render_template('lista.html', leitor = leitor, pesquisa = pesquisa)
 
 
 
@@ -168,8 +175,6 @@ def alteracao(id):
 @app.route("/alteracaoProdutos/<id>", methods=['POST', 'GET'])
 def alteracao_produtos(id):
 
-    erro = None
-    mensagem = None
     new_tasks = []
 
     if request.method == 'POST':
@@ -179,30 +184,31 @@ def alteracao_produtos(id):
         descricao = request.form['descricao']
         arquivo = request.files['arquivo']
 
-        if arquivo.filename == '' or nome == '' or descricao == '':
+        #cria uma nova lista, substituindo a linha do produto escolhido
+        with open('cadastro.csv', 'rt') as file_in:
+            leitor = csv.DictReader(file_in)
+            for row in leitor:
+                produtos = dict(row)
+                if produtos['id'] == id: 
 
-            erro = "Por favor, preencha todos os campos !!"
-            
-        else:
+                    #remove a imagem da pasta
+                    os.remove(produtos['arquivo'])
+                    
+                    #salva a nova imagem na pasta
+                    path = os.path.join(app.config['upload_folder'], arquivo.filename)
+                    arquivo.save(path)
 
-            path = os.path.join(app.config['upload_folder'], arquivo.filename)
-            arquivo.save(path)
+                    new_tasks.append({'id': id, 'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': 'static/backup/' + arquivo.filename})
+                
+                else:
+                
+                    new_tasks.append(produtos)
 
-            with open('cadastro.csv', 'rt') as file_in:
-                leitor = csv.DictReader(file_in)
-                for row in leitor:
-                    produtos = dict(row)
-                    if produtos['id'] == id: 
-                        new_tasks.append({'id': id, 'nome': nome,'categoria': categoria,'descricao': descricao,'arquivo': '/static/backup/' + arquivo.filename})
-                    else:
-                        new_tasks.append(produtos)
-
-            with open('cadastro.csv', 'wt') as file_out:
-                escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo'])
-                escritor.writeheader()
-                escritor.writerows(new_tasks)
-
-            mensagem = "Produto alterado com sucesso !!"
+        #wt - substitui o arquivo se ele existir e cria um caso contrário
+        with open('cadastro.csv', 'wt') as file_out:
+            escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo'])
+            escritor.writeheader()
+            escritor.writerows(new_tasks)
 
     return redirect(url_for('lista'))
 
@@ -211,9 +217,10 @@ def alteracao_produtos(id):
 #página de exclusão
 @app.route("/exclusao/<id>", methods=['POST', 'GET'])
 def exclusao(id):
-    
+
     new_tasks = []
-        
+
+    #exclui o produto selecionado
     with open('cadastro.csv', 'rt') as file_in:
         leitor = csv.DictReader(file_in)
         for row in leitor:
@@ -221,15 +228,17 @@ def exclusao(id):
             new_tasks.append(produtos)
             if produtos['id'] == id:   
                 new_tasks.remove(produtos)
-                
+                #remove a imagem da pasta
+                os.remove(produtos['arquivo'])
+
+    #wt - substitui o arquivo se ele existir e cria um caso contrário
     with open('cadastro.csv', 'wt') as file_out:
         escritor = csv.DictWriter(file_out, ['id', 'nome', 'categoria', 'descricao', 'arquivo'])
         escritor.writeheader()
         escritor.writerows(new_tasks)
-
+    
     return redirect(url_for('lista'))
 
 
-    
 if __name__ == "__main__":
     app.run(debug=True)
