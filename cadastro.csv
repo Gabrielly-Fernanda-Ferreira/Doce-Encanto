@@ -1,3 +1,3 @@
 id,nome,categoria,descricao,arquivo
-1,Bolo,bolos,Bolo de Chocolate,/static/backup/bolos.png
-2,Cupcakes,cupcakes,Cupcakes de Morango,/static/backup/cupcakes.png
+2,Bolo de chocolate,bolos,bolo de chocolate com recheio de avelã,/static/backup/bolos.png
+3,Bolo de chocolate,bolos,bolo de chocolate com recheio de avelã,/static/backup/bolos.png

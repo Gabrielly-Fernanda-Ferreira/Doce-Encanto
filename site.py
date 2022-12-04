@@ -75,7 +75,7 @@ def cadastro():
                 produtos = dict(row)
                 if produtos['id'] >= count:
                     id = int(produtos['id'])
-            id = id + 1
+            id = int(id) + 1
 
 
     #cadastra os produtos
@@ -209,26 +209,33 @@ def alteracao_produtos(id):
 
 
 #página de exclusão
-@app.route("/exclusao/<id>", methods=['POST', 'GET'])
-def exclui(exclusao):
+@app.route("/exclui/<id>", methods=['POST', 'GET'])
 
-    with open('cadastro.csv', 'rt') as file_in:
-        leitor = csv.DictReader(file_in)
+def exclui(id):
+    
+    linhas= []
 
-        del row['arquivo']
-        del row['nome']
-        del row['descricao']
-                        
-        if tipo == "administrador":
-            
-            area_exclusiva = "sim"
-                
-            return render_template('lista.html', area_exclusiva = area_exclusiva, leitor = leitor)
-        else:
-                
-            return render_template('lista.html', leitor = leitor)
+    if request.method=='POST':
         
-    return render_template('lista.html', leitor = leitor)
+        with open('cadastro.csv', 'rt') as file_in:
+            leitor = csv.DictReader(file_in)
+            
+            for row in leitor:
+                produtos = dict(row)
+                linhas.append(produtos)
+                
+                if produtos['id'] == id:
+                    linhas.remove(produtos)
+                    
+        with open ('cadastro.csv','wt') as file_out:
+            escritor= csv.DictWriter(file_out,['id','nome','categoria','descricao','arquivo'])
+            escritor.writeheader()
+            escritor.writerows(linhas)
+        
+    return redirect(url_for('lista'))
+    
+
+    
 
 
 
